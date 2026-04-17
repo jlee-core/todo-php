@@ -6,5 +6,8 @@
             "email": "j.lee@core-tech.jp"
         }
     ],
-    "require": {}
+    "require": {},
+    "scripts": {
+        "dev": "php -S localhost:8000 -t public"
+    }
 }
