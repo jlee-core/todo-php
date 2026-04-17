@@ -1,0 +1,10 @@
+{
+    "name": "j.lee/todo-php",
+    "authors": [
+        {
+            "name": "j.lee",
+            "email": "j.lee@core-tech.jp"
+        }
+    ],
+    "require": {}
+}
