@@ -5,9 +5,8 @@ class Todo
     private $title;
     private $createdAt;
 
-    public function __construct($title)
+    public function __construct()
     {
-        $this->title = $title;
         $this->createdAt = new DateTime();
     }
 
