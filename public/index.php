@@ -1,20 +1,17 @@
 <?php
-require __DIR__ . '/../app/controller/TodoController.php';
+require __DIR__ . '/../app/Controllers/TodoController.php';
 
-// jsonファイルのパスを指定
-$filePath = '../todos.json';
+$controller = new TodoController();
 
-$todoController = new TodoController();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $controller->store();
+}
 
-// 配列を更新する
-$todos = $todoController->getTodos($filePath);
+if (isset($_GET['delete'])) {
+  $controller->delete();
+}
 
-// Todoを追加する関数
-$todoController->addTodo($filePath, $todos);
-
-$deleteId = -1;
-//　Todoを削除する関数
-$todoController->deleteTodo($filePath, $todos, $deleteId);
+$todos = $controller->index();
 
 ?>
 
@@ -29,7 +26,7 @@ $todoController->deleteTodo($filePath, $todos, $deleteId);
 
 <body>
   <h1>Todoアプリ</h1>
-  <form method="POST" action="">
+  <form method="POST" action="index.php">
     <input type="text" name="title" placeholder="Todoを入力">
     <button type="submit">追加</button>
   </form>
@@ -39,8 +36,8 @@ $todoController->deleteTodo($filePath, $todos, $deleteId);
   <ul>
     <?php foreach ($todos as $todo): ?>
       <li>
-        <?php echo htmlspecialchars($todo['title'], ENT_QUOTES, 'UTF-8'); ?>
-        <a href="?delete_id=<?php echo $todo['id']; ?>">削除</a>
+        <?= htmlspecialchars($todo->toArray()['title']); ?>
+        <a href="?delete=<?= $todo->toArray()['id'] ?>">削除</a>
       </li>
     <?php endforeach ?>
   </ul>
